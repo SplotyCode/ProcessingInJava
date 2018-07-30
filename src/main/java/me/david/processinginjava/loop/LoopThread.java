@@ -11,11 +11,12 @@ public class LoopThread extends Thread {
 
     @Override
     public void run() {
-        if (application.isLoop()) {
+        application.getRunning().set(true);
+        if (application.getStartupHelper().isLoop()) {
             long lastLoop;
-            long loopDelay = 1000 / application.getFrames();
+            long loopDelay = 1000 / application.getStartupHelper().getFrames();
 
-            while (application.isRuuning()) {
+            while (application.getRunning().get()) {
                 lastLoop = System.currentTimeMillis();
                 callLoop();
 
@@ -27,6 +28,7 @@ public class LoopThread extends Thread {
                 }
             }
         } else callLoop();
+        application.getRunning().set(false);
         System.out.println("Application Loop Thread stopped!");
     }
 

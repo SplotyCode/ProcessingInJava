@@ -5,19 +5,21 @@ import me.david.processinginjava.exception.StartUpException;
 import me.david.processinginjava.loop.LoopThread;
 import me.david.processinginjava.utils.StartupHelper;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Application {
 
-    @Getter private boolean loop = true, ruuning, setup;
-    @Getter private short frames = 30;
-    private static StartupHelper startupHelper = new StartupHelper();
+    @Getter private boolean setup;
+    @Getter private AtomicBoolean running = new AtomicBoolean(false);
+    @Getter private StartupHelper startupHelper = new StartupHelper();
     private LoopThread loopThread;
 
     protected void setup() throws Exception {}
     public void loop() throws Exception {}
 
     public static void launch(Application application) {
-        if (startupHelper.isStartupCalled()) throw new StartUpException("Launch called twice");
-        startupHelper.setStartupCalled(true);
+        if (application.startupHelper.isStartupCalled()) throw new StartUpException("Launch called twice");
+        application.startupHelper.setStartupCalled(true);
 
         application.setup = true;
         try {
@@ -28,13 +30,12 @@ public class Application {
         application.setup = false;
         application.loopThread = new LoopThread(application);
         application.loopThread.start();
-        application.ruuning = true;
     }
 
     protected void noLoop() {
         if (!setup) throw new StartUpException("noLoop() not called in setup()");
-        if (!loop) throw new StartUpException("noLoop() called twice");
-        loop = false;
+        if (!startupHelper.isLoop()) throw new StartUpException("noLoop() called twice");
+        startupHelper.setLoop(false);
     }
 
 
