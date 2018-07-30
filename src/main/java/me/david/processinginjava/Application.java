@@ -28,6 +28,9 @@ public class Application {
             throw new StartUpException("Exception in setup() method", ex);
         }
         application.setup = false;
+
+        application.startupHelper.checkStart();
+
         application.loopThread = new LoopThread(application);
         application.loopThread.start();
     }
@@ -38,6 +41,17 @@ public class Application {
         startupHelper.setLoop(false);
     }
 
+    protected void frameRate(short fps) {
+        if (!setup) throw new StartUpException("noLoop() not called in setup()");
+        startupHelper.setFrames(fps);
+    }
 
+    protected void size(int width, int height) {
+        if (!setup) throw new StartUpException("noLoop() not called in setup()");
+        if (width < 1 || height < 1) throw new IllegalArgumentException("Invalid size: (width: " + width + " height: " + height + ")");
+
+        startupHelper.setWidth(width);
+        startupHelper.setHeight(height);
+    }
 
 }

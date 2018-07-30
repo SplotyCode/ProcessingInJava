@@ -2,6 +2,7 @@ package me.david.processinginjava.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.david.processinginjava.exception.CanNotStartException;
 
 public class StartupHelper {
 
@@ -10,7 +11,10 @@ public class StartupHelper {
     @Getter @Setter private short frames = 30;
     @Getter @Setter private boolean loop = true;
 
+    @Getter @Setter private int width = -1, height = -1;
 
-
+    public void checkStart() {
+        if (width == -1 || height == -1) throw new CanNotStartException("size() method not called!");
+    }
 
 }
