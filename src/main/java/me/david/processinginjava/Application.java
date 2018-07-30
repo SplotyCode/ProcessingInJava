@@ -1,38 +1,38 @@
 package me.david.processinginjava;
 
+import lombok.Getter;
 import me.david.processinginjava.exception.StartUpException;
+import me.david.processinginjava.loop.LoopThread;
 import me.david.processinginjava.utils.StartupHelper;
 
 public class Application {
 
-    private boolean loop = true;
+    @Getter private boolean loop = true, ruuning, setup;
+    @Getter private short frames = 30;
     private static StartupHelper startupHelper = new StartupHelper();
+    private LoopThread loopThread;
 
-    protected void setup() {}
-    protected void loop() {}
+    protected void setup() throws Exception {}
+    public void loop() throws Exception {}
 
-    public static void launch() {
+    public static void launch(Application application) {
         if (startupHelper.isStartupCalled()) throw new StartUpException("Launch called twice");
         startupHelper.setStartupCalled(true);
 
-        String appClazz = startupHelper.getApplicationClass();
-        if (appClazz == null) throw new StartUpException("Count not find Application Class");
-
+        application.setup = true;
         try {
-            Class clazz = Class.forName(appClazz, false, Thread.currentThread().getContextClassLoader());
-            if (Application.class.isAssignableFrom(clazz)) {
-                clazz.getMethod("setup").invoke(clazz);
-            } else {
-                throw new RuntimeException("Launching Class need to extend from Application!");
-            }
-        } catch (ClassNotFoundException ex) {
-            throw new StartUpException("Count not find class from String: '" + appClazz + "'!", ex);
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
+            application.setup();
+        } catch (Exception ex) {
+            throw new StartUpException("Exception in setup() method", ex);
         }
+        application.setup = false;
+        application.loopThread = new LoopThread(application);
+        application.loopThread.start();
+        application.ruuning = true;
     }
 
     protected void noLoop() {
+        if (!setup) throw new StartUpException("noLoop() not called in setup()");
         if (!loop) throw new StartUpException("noLoop() called twice");
         loop = false;
     }
