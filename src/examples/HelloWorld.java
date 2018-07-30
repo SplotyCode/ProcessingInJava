@@ -16,7 +16,7 @@ public class HelloWorld extends Application {
     private long lastLoop;
 
     @Override
-    public void loop() throws Exception {
+    public void draw() throws Exception {
         System.out.println((System.currentTimeMillis() - lastLoop) + "ms delay");
         lastLoop = System.currentTimeMillis();
         Thread.sleep(200);

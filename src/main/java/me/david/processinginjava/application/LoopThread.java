@@ -1,6 +1,5 @@
-package me.david.processinginjava.loop;
+package me.david.processinginjava.application;
 
-import lombok.AllArgsConstructor;
 import me.david.processinginjava.Application;
 import me.david.processinginjava.exception.TickException;
 
@@ -42,15 +41,15 @@ public class LoopThread extends Thread {
         else overload = 0;
         if (overload == 20) {
             overload = 0;
-            System.out.println("loop() function takes to long count not keep up the last 20 ticks!");
+            System.out.println("draw() function takes to long count not keep up the last 20 ticks!");
         }
     }
 
     private void callLoop() {
         try {
-            application.loop();
+            application.draw();
         } catch (Exception ex) {
-            throw new TickException("Exception in loop() method", ex);
+            throw new TickException("Exception in draw() method", ex);
         }
     }
 }

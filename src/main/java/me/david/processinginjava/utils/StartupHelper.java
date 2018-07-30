@@ -9,7 +9,7 @@ public class StartupHelper {
     @Getter @Setter private boolean startupCalled;
 
     @Getter @Setter private short frames = 30;
-    @Getter @Setter private boolean loop = true;
+    @Getter @Setter private boolean loop = true, fullscreen;
 
     @Getter @Setter private int width = -1, height = -1;
 
