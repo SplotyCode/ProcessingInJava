@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import me.david.processinginjava.Application;
 import me.david.processinginjava.exception.TickException;
 
-@AllArgsConstructor
 public class LoopThread extends Thread {
 
     private Application application;
+    private int overload = 0;
+
+    public LoopThread(Application application) {
+        this.application = application;
+    }
 
     @Override
     public void run() {
@@ -22,7 +26,8 @@ public class LoopThread extends Thread {
 
                 long delay = System.currentTimeMillis() - lastLoop;
                 try {
-                    sleep(loopDelay - delay);
+                    handleOverload(delay, loopDelay);
+                    sleep(Math.max(0, loopDelay - delay));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -30,6 +35,15 @@ public class LoopThread extends Thread {
         } else callLoop();
         application.getRunning().set(false);
         System.out.println("Application Loop Thread stopped!");
+    }
+
+    private void handleOverload(long delay, long loopDelay) {
+        if (delay > loopDelay) overload++;
+        else overload = 0;
+        if (overload == 20) {
+            overload = 0;
+            System.out.println("loop() function takes to long count not keep up the last 20 ticks!");
+        }
     }
 
     private void callLoop() {
