@@ -17,9 +17,7 @@ public class Events {
         GLFW.glfwSetCursorPosCallback(window, new MousePositionHandler(application));
 
         /* Keyboard Events/Callbacks */
-        GLFW.glfwSetKeyCallback(window, (windowID, key, scancode, action, mods) -> {
-
-        });
+        GLFW.glfwSetKeyCallback(window, new KeyBoardHandler(application));
 
     }
 }

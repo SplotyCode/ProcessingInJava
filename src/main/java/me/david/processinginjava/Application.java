@@ -22,6 +22,9 @@ public class Application {
     public int mouseButtonInt;
     public double mouseX, mouseY;
     public double pmouseX, pmouseY;
+    public boolean keyPressed;
+    public int key;
+    public char keyCode;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
@@ -31,6 +34,10 @@ public class Application {
     public void mouseWheel(double yOffset) throws Exception {}
     public void mouseDragged() throws Exception {}
     public void mouseMoved() throws Exception {}
+
+    public void keyPressed() throws Exception {}
+    public void keyReleased() throws Exception {}
+    public void keyTyped() throws Exception {}
 
     public static void launch(Application application) {
         instance = application;
