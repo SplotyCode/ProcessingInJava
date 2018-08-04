@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.david.processinginjava.application.WindowHelper;
 import me.david.processinginjava.exception.StartUpException;
 import me.david.processinginjava.application.LoopThread;
+import me.david.processinginjava.input.KeyBoardEvent;
 import me.david.processinginjava.input.MouseButton;
 import me.david.processinginjava.input.MouseClickEvent;
 import me.david.processinginjava.utils.StartupHelper;
@@ -44,6 +45,9 @@ public class Application {
     public void keyPressed() throws Exception {}
     public void keyReleased() throws Exception {}
     public void keyTyped() throws Exception {}
+    public void keyPressed(KeyBoardEvent event) throws Exception {}
+    public void keyReleased(KeyBoardEvent event) throws Exception {}
+    public void keyTyped(KeyBoardEvent event) throws Exception {}
 
     public static void launch(Application application) {
         instance = application;

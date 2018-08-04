@@ -15,27 +15,34 @@ public class KeyBoardHandler extends InputHandler implements GLFWKeyCallbackI {
 
     @Override
     public void invoke(long windowID, int key, int scancode, int action, int mods) {
-        System.out.println(action);
+        String name = GLFW.glfwGetKeyName(key, scancode);
+        char keyCode = name != null && !name.isEmpty() ? name.charAt(0) : null;
+        KeyBoardEvent event = new KeyBoardEvent(key, scancode, action, mods, name, keyCode);
+
         if (action == GLFW.GLFW_RELEASE) {
             keysPressed--;
             try {
                 application.keyReleased();
+                application.keyReleased(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in keyReleased() function", ex);
             }
         } else if (action == GLFW.GLFW_PRESS) {
             keysPressed++;
+
             application.key = key;
-            String name = GLFW.glfwGetKeyName(key, scancode);
-            application.keyCode = name != null && !name.isEmpty() ? name.charAt(0) : null;
+            application.keyCode = keyCode;
+
             try {
                 application.keyPressed();
+                application.keyPressed(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in keyPressed() function", ex);
             }
         } else {
             try {
                 application.keyTyped();
+                application.keyTyped(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in keyTyped() function", ex);
             }
