@@ -18,6 +18,11 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
             application.mouseButton = MouseButton.NONE;
             application.mouseButtonInt = 0;
             try {
+                application.mouseReleased();
+            } catch (Exception ex) {
+                throw new InputException("Exception in mouseReleased() function", ex);
+            }
+            try {
                 application.mouseClicked();
             } catch (Exception ex) {
                 throw new InputException("Exception in mouseClicked() function", ex);
@@ -39,6 +44,12 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
                     break;
             }
             application.mouseButtonInt = button;
+
+            try {
+                application.mousePressed();
+            } catch (Exception ex) {
+                throw new InputException("Exception in mousePressed() function", ex);
+            }
         }
     }
 }

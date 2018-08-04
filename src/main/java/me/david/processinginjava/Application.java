@@ -23,6 +23,8 @@ public class Application {
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
+    public void mouseReleased() throws Exception {}
+    public void mousePressed() throws Exception {}
     public void mouseClicked() throws Exception {}
     public void mouseWheel(double yOffset) throws Exception {}
     public void mouseDragged() throws Exception {}
