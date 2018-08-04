@@ -27,6 +27,15 @@ public class Events {
         GLFW.glfwSetMouseButtonCallback(window, (windowID, button, action, mods) -> {
             if (action == GLFW.GLFW_RELEASE) {
                 application.mousePressed = false;
+                application.mouseButton = MouseButton.NONE;
+                application.mouseButtonInt = 0;
+                try {
+                    application.mouseClicked();
+                } catch (Exception ex) {
+                    throw new InputException("Exception in mouseClicked() function", ex);
+                }
+            } else {
+                application.mousePressed = true;
                 switch (button) {
                     case GLFW.GLFW_MOUSE_BUTTON_LEFT:
                         application.mouseButton = MouseButton.LEFT;
@@ -40,14 +49,7 @@ public class Events {
                         application.mouseButton = MouseButton.OTHER;
                         break;
                 }
-                try {
-                    application.mouseClicked();
-                } catch (Exception ex) {
-                    throw new InputException("Exception in mouseClicked() function", ex);
-                }
-            } else {
-                application.mousePressed = true;
-                application.mouseButton = MouseButton.NONE;
+                application.mouseButtonInt = button;
             }
         });
     }

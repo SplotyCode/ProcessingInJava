@@ -19,6 +19,7 @@ public class Application {
     public boolean focused;
     public boolean mousePressed;
     public MouseButton mouseButton = MouseButton.NONE;
+    public int mouseButtonInt;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
