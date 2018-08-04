@@ -2,8 +2,8 @@ from os import listdir
 from os.path import isfile, join
 
 
-mypath = "/home/david/Desktop/Programieren/java/ProcessingInJava/libs";
-mavenString = "";
+mypath = "/home/david/Desktop/Programieren/java/ProcessingInJava/libs"
+mavenString = ""
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 for file in onlyfiles:
     mavenString += """<dependency>
@@ -12,6 +12,6 @@ for file in onlyfiles:
     <version>${lwjgl.version}</version>
     <scope>system</scope>
     <systemPath>${pom.basedir}/libs/""" + file + """</systemPath>
-</dependency>\n""";
+</dependency>\n"""
 
-print mavenString;
+print(mavenString)
