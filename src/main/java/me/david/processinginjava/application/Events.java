@@ -44,6 +44,7 @@ public class Events {
                         application.mouseButton = MouseButton.RIGHT;
                         break;
                     case GLFW.GLFW_MOUSE_BUTTON_MIDDLE:
+                        application.mouseButton = MouseButton.MIDDLE;
                         break;
                     default:
                         application.mouseButton = MouseButton.OTHER;
