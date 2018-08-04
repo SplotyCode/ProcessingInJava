@@ -13,12 +13,14 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
 
     @Override
     public void invoke(long windowID, int button, int action, int mods) {
+        MouseEvent event = new MouseEvent(action, button, mods, MouseButton.fromButton(button));
         if (action == GLFW.GLFW_RELEASE) {
             application.mousePressed = false;
             application.mouseButton = MouseButton.NONE;
             application.mouseButtonInt = 0;
             try {
                 application.mouseReleased();
+                application.mouseReleased(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in mouseReleased() function", ex);
             }
@@ -42,12 +44,14 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
 
             try {
                 application.mousePressed();
+                application.mousePressed(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in mousePressed() function", ex);
             }
         } else {
             try {
                 application.mouseClicked();
+                application.mouseClicked(event);
             } catch (Exception ex) {
                 throw new InputException("Exception in mouseClicked() function", ex);
             }

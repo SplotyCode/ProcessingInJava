@@ -5,6 +5,7 @@ import me.david.processinginjava.application.WindowHelper;
 import me.david.processinginjava.exception.StartUpException;
 import me.david.processinginjava.application.LoopThread;
 import me.david.processinginjava.input.MouseButton;
+import me.david.processinginjava.input.MouseClickEvent;
 import me.david.processinginjava.utils.StartupHelper;
 
 public class Application {
@@ -28,9 +29,14 @@ public class Application {
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
+
     public void mouseReleased() throws Exception {}
     public void mousePressed() throws Exception {}
     public void mouseClicked() throws Exception {}
+    public void mouseReleased(MouseClickEvent event) throws Exception {}
+    public void mousePressed(MouseClickEvent event) throws Exception {}
+    public void mouseClicked(MouseClickEvent event) throws Exception {}
+
     public void mouseWheel(double yOffset) throws Exception {}
     public void mouseDragged() throws Exception {}
     public void mouseMoved() throws Exception {}
