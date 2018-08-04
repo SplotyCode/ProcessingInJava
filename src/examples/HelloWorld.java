@@ -27,5 +27,7 @@ public class HelloWorld extends Application {
         background(Color.CYAN.getRGB());
         stroke(2);
         line(2, 2, 40, 40);
+        strokeWeight(10);
+        line(5, 2, 5, 20);
     }
 }

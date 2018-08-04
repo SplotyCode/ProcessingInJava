@@ -66,4 +66,21 @@ public class BaseObject {
         glEnd();
     }
 
+    public static void triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+        glBegin(GL_TRIANGLES);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+        glVertex2f(x3, y3);
+        glEnd();
+    }
+
+    public static void rect(float x, float y, float width, float height) {
+        glBegin(GL_POINTS);
+        glVertex2f(x, y);
+        glVertex2f(x + width, y);
+        glVertex2f(x, y + height);
+        glVertex2f(x + width, y + height);
+        glEnd();
+    }
+
 }
