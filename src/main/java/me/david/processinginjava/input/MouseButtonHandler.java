@@ -22,12 +22,7 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
             } catch (Exception ex) {
                 throw new InputException("Exception in mouseReleased() function", ex);
             }
-            try {
-                application.mouseClicked();
-            } catch (Exception ex) {
-                throw new InputException("Exception in mouseClicked() function", ex);
-            }
-        } else {
+        } else if (action == GLFW.GLFW_PRESS) {
             application.mousePressed = true;
             switch (button) {
                 case GLFW.GLFW_MOUSE_BUTTON_LEFT:
@@ -49,6 +44,12 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
                 application.mousePressed();
             } catch (Exception ex) {
                 throw new InputException("Exception in mousePressed() function", ex);
+            }
+        } else {
+            try {
+                application.mouseClicked();
+            } catch (Exception ex) {
+                throw new InputException("Exception in mouseClicked() function", ex);
             }
         }
     }
