@@ -1,10 +1,9 @@
 package me.david.processinginjava.application;
 
 import me.david.processinginjava.Application;
-import me.david.processinginjava.exception.InputException;
 import me.david.processinginjava.input.*;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 public class Events {
 
@@ -16,5 +15,6 @@ public class Events {
         });
         GLFW.glfwSetMouseButtonCallback(window, new MouseButtonHandler(application));
         GLFW.glfwSetScrollCallback(window, new MouseScrollHandler(application));
+        GLFW.glfwSetCursorPosCallback(window, new MousePositionHandler(application));
     }
 }
