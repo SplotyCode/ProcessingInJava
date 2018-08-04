@@ -19,3 +19,38 @@ Supported Functions:
 Supported Variables:
 * frameCount
 * focused
+* mousePressed
+* mouseButton
+* mouseButtonInt
+* mouseX
+* mouseY
+* pmouseX
+* pmouseY
+* keyPressed
+* key
+* keyCode
+
+Supported Events:
+* setup()
+* draw()
+
+* mouseReleased()
+* mousePressed()
+* mouseClicked()
+* mouseReleased(MouseClickEvent event)
+* mousePressed(MouseClickEvent event)
+* mouseClicked(MouseClickEvent event)
+
+* mouseWheel(double yOffset)
+* mouseDragged()
+* mouseMoved()
+
+* keyPressed()
+* keyReleased()
+* keyTyped()
+* keyPressed(KeyBoardEvent event)
+* keyReleased(KeyBoardEvent event)
+* keyTyped(KeyBoardEvent event)
+
+It seems a lot but a we also miss a lot of features! <br>
+See here https://processing.org/reference/
