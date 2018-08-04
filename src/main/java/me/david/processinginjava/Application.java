@@ -16,6 +16,7 @@ public class Application {
 
     public long frameCount = 0;
     public boolean focused;
+    public boolean mousePressed;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}

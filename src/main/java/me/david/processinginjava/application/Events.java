@@ -25,11 +25,14 @@ public class Events {
         });
         GLFW.glfwSetMouseButtonCallback(window, (windowID, button, action, mods) -> {
             if (action == GLFW.GLFW_RELEASE) {
+                application.mousePressed = false;
                 try {
                     application.mouseClicked();
                 } catch (Exception ex) {
                     throw new InputException("Exception in mouseClicked() function", ex);
                 }
+            } else {
+                application.mousePressed = true;
             }
         });
     }
