@@ -14,9 +14,6 @@ public class MousePositionHandler extends InputHandler implements GLFWCursorPosC
     public void invoke(long windowID, double xPos, double yPos) {
         if (!application.focused) return;
 
-        application.mouseX = xPos;
-        application.mouseY = yPos;
-
         if (application.mousePressed) {
             try {
                 application.mouseDragged();

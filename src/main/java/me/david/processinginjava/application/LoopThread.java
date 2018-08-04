@@ -2,8 +2,11 @@ package me.david.processinginjava.application;
 
 import me.david.processinginjava.Application;
 import me.david.processinginjava.exception.TickException;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
+
+import java.nio.DoubleBuffer;
 
 public class LoopThread extends Thread {
 
@@ -48,6 +51,15 @@ public class LoopThread extends Thread {
 
     private void callLoop() {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
+        application.pmouseX = application.mouseX;
+        application.pmouseY = application.mouseY;
+
+        DoubleBuffer posX = BufferUtils.createDoubleBuffer(1);
+        DoubleBuffer posY = BufferUtils.createDoubleBuffer(1);
+        GLFW.glfwGetCursorPos(application.getWindowHelper().getWindow(), posX, posY);
+        application.mouseX = posX.get(0);
+        application.mouseY = posY.get(0);
 
         try {
             application.draw();

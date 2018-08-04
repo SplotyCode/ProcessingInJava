@@ -21,6 +21,7 @@ public class Application {
     public MouseButton mouseButton = MouseButton.NONE;
     public int mouseButtonInt;
     public double mouseX, mouseY;
+    public double pmouseX, pmouseY;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
