@@ -26,6 +26,6 @@ public class HelloWorld extends Application {
         //Thread.sleep(200);
         background(Color.CYAN.getRGB());
         stroke(2);
-        line(2, 2, 250, 250);
+        line(2, 2, 40, 40);
     }
 }

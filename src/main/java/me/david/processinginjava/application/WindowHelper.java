@@ -83,9 +83,13 @@ public class WindowHelper {
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
         GL11.glClearColor(0, 0, 0, 1);
+
+        GL11.glViewport(0, 0, application.getStartupHelper().getWidth(), application.getStartupHelper().getHeight());
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glOrtho(0, application.getStartupHelper().getWidth(), 0, application.getStartupHelper().getHeight(), 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glLoadIdentity();
     }
 
     public boolean shouldStop() {

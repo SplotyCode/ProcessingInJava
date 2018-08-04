@@ -37,8 +37,7 @@ public class BaseObject {
     }
 
     public static void line(float x1, float y1, float x2, float y2) {
-        GL11.glLineWidth(25);
-        GL11.glColor3f(0.0f, 1.0f, 0.2f);
+        updateColor(stroke);
         GL11.glBegin(GL11.GL_LINE_STRIP);
 
         GL11.glVertex2d(x1, y1);
@@ -49,6 +48,22 @@ public class BaseObject {
     private static void updateColor(int number) {
         Color color = new Color(number);
         GL11.glColor4f(color.getRed(), color.getGreen(),  color.getBlue(), color.getAlpha());
+    }
+
+    public static void strokeWeight(int weight) {
+        GL11.glLineWidth(weight);
+    }
+
+    public static void point(float x, float y) {
+        glBegin(GL_POINTS);
+        glVertex2f(x, y);
+        glEnd();
+    }
+
+    public static void point(float x, float y, float z) {
+        glBegin(GL_POINTS);
+        glVertex3f(x, y, z);
+        glEnd();
     }
 
 }
