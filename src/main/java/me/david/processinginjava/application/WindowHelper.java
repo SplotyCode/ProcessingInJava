@@ -7,15 +7,19 @@ import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
+import java.awt.*;
 import java.nio.IntBuffer;
 
 
 public class WindowHelper {
 
     @Getter private long window;
+    @Getter private Events events;
 
     public void start(Application application) {
         // Setup an error callback. The default implementation
@@ -31,8 +35,16 @@ public class WindowHelper {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE); // the window will stay hidden after creation
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE); // the window will be resizable
 
+        // Get the resolution of the primary monitor
+        GLFWVidMode vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+
+        if (application.getStartupHelper().isFullscreen()) {
+            application.getStartupHelper().setWidth(vidmode.width());
+            application.getStartupHelper().setHeight(vidmode.height());
+        }
+
         // Create the window
-        window = GLFW.glfwCreateWindow(300, 300, "Hello World!", MemoryUtil.NULL, MemoryUtil.NULL);
+        window = GLFW.glfwCreateWindow(application.getStartupHelper().getWidth(), application.getStartupHelper().getHeight(), application.getClass().getName(), MemoryUtil.NULL, MemoryUtil.NULL);
         if (window == MemoryUtil.NULL)
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -50,9 +62,6 @@ public class WindowHelper {
             // Get the window size passed to glfwCreateWindow
             GLFW.glfwGetWindowSize(window, pWidth, pHeight);
 
-            // Get the resolution of the primary monitor
-            GLFWVidMode vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
-
             // Center the window
             GLFW.glfwSetWindowPos(
                     window,
@@ -66,8 +75,23 @@ public class WindowHelper {
         // Enable v-sync
         GLFW.glfwSwapInterval(1);
 
+        GLFW.glfwMakeContextCurrent(window);
+
+        events = new Events(window, application);
+
         // Make the window visible
         GLFW.glfwShowWindow(window);
+        GL.createCapabilities();
+        GL11.glClearColor(0, 0, 0, 1);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+    }
+
+    public boolean shouldStop() {
+        boolean result = GLFW.glfwWindowShouldClose(window);
+        if (result) close();
+        return result;
     }
 
     public void close() {

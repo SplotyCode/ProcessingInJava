@@ -6,20 +6,22 @@ import me.david.processinginjava.exception.StartUpException;
 import me.david.processinginjava.application.LoopThread;
 import me.david.processinginjava.utils.StartupHelper;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class Application {
 
     @Getter private boolean setup;
-    @Getter private AtomicBoolean running = new AtomicBoolean(false);
     @Getter private StartupHelper startupHelper = new StartupHelper();
     private LoopThread loopThread;
     @Getter private WindowHelper windowHelper = new WindowHelper();
+    @Getter private static Application instance;
+
+    public long frameCount = 0;
+    public boolean focused;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
 
     public static void launch(Application application) {
+        instance = application;
         if (application.startupHelper.isStartupCalled()) throw new StartUpException("Launch called twice");
         application.startupHelper.setStartupCalled(true);
 
@@ -32,7 +34,6 @@ public class Application {
         application.setup = false;
 
         application.startupHelper.checkStart();
-        application.windowHelper.start(application);
 
         application.loopThread = new LoopThread(application);
         application.loopThread.start();
@@ -45,8 +46,8 @@ public class Application {
     }
 
     protected void fullScreen() {
-        if (!setup) throw new StartUpException("noLoop() not called in setup()");
-        if (!startupHelper.isFullscreen()) throw new StartUpException("noLoop() called twice");
+        if (!setup) throw new StartUpException("fullscrren() not called in setup()");
+        if (startupHelper.isFullscreen()) throw new StartUpException("fullscrren() called twice");
         startupHelper.setFullscreen(true);
     }
 

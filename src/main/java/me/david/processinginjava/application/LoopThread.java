@@ -2,6 +2,8 @@ package me.david.processinginjava.application;
 
 import me.david.processinginjava.Application;
 import me.david.processinginjava.exception.TickException;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
 
 public class LoopThread extends Thread {
 
@@ -14,12 +16,12 @@ public class LoopThread extends Thread {
 
     @Override
     public void run() {
-        application.getRunning().set(true);
+        application.getWindowHelper().start(application);
         if (application.getStartupHelper().isLoop()) {
             long lastLoop;
             long loopDelay = 1000 / application.getStartupHelper().getFrames();
 
-            while (application.getRunning().get()) {
+            while (!application.getWindowHelper().shouldStop()) {
                 lastLoop = System.currentTimeMillis();
                 callLoop();
 
@@ -32,7 +34,6 @@ public class LoopThread extends Thread {
                 }
             }
         } else callLoop();
-        application.getRunning().set(false);
         System.out.println("Application Loop Thread stopped!");
     }
 
@@ -46,10 +47,15 @@ public class LoopThread extends Thread {
     }
 
     private void callLoop() {
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
         try {
             application.draw();
         } catch (Exception ex) {
             throw new TickException("Exception in draw() method", ex);
         }
+        GLFW.glfwSwapBuffers(application.getWindowHelper().getWindow());
+        GLFW.glfwPollEvents();
+        application.frameCount++;
     }
 }

@@ -17,9 +17,5 @@ public class StartupHelper {
         if (width == -1 || height == -1) throw new CanNotStartException("size() method not called!");
     }
 
-    public void createWinow() {
-
-    }
-
 
 }
