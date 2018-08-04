@@ -52,5 +52,13 @@ public class Events {
                 application.mouseButtonInt = button;
             }
         });
+        GLFW.glfwSetScrollCallback(window, (windowID, xoffset, yoffset) -> {
+            if (yoffset != 0)
+                try {
+                    application.mouseWheel(yoffset);
+                } catch (Exception ex) {
+                    throw new InputException("Exception in mouseWheel() function", ex);
+                }
+        });
     }
 }

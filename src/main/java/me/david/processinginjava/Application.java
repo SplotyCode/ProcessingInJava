@@ -24,6 +24,7 @@ public class Application {
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
     public void mouseClicked() throws Exception {}
+    public void mouseWheel(double yOffset) throws Exception {}
 
     public static void launch(Application application) {
         instance = application;
