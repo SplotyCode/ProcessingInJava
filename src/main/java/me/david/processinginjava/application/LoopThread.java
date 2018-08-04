@@ -58,4 +58,5 @@ public class LoopThread extends Thread {
         GLFW.glfwPollEvents();
         application.frameCount++;
     }
+
 }

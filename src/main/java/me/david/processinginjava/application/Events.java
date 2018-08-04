@@ -1,6 +1,7 @@
 package me.david.processinginjava.application;
 
 import me.david.processinginjava.Application;
+import me.david.processinginjava.exception.InputException;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -18,6 +19,18 @@ public class Events {
             GL11.glOrtho(0, application.getStartupHelper().getWidth(), 0, application.getStartupHelper().getHeight(), 1, -1);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             GL11.glLoadIdentity();
+        });
+        GLFW.glfwSetKeyCallback(window, (windowID, key, scancode, action, mods) -> {
+
+        });
+        GLFW.glfwSetMouseButtonCallback(window, (windowID, button, action, mods) -> {
+            if (action == GLFW.GLFW_RELEASE) {
+                try {
+                    application.mouseClicked();
+                } catch (Exception ex) {
+                    throw new InputException("Exception in mouseClicked() function", ex);
+                }
+            }
         });
     }
 }
