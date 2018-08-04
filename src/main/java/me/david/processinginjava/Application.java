@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.david.processinginjava.application.WindowHelper;
 import me.david.processinginjava.exception.StartUpException;
 import me.david.processinginjava.application.LoopThread;
+import me.david.processinginjava.input.MouseButton;
 import me.david.processinginjava.utils.StartupHelper;
 
 public class Application {
@@ -17,6 +18,7 @@ public class Application {
     public long frameCount = 0;
     public boolean focused;
     public boolean mousePressed;
+    public MouseButton mouseButton = MouseButton.NONE;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}

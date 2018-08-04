@@ -5,6 +5,7 @@ public enum  MouseButton {
     LEFT,
     RIGHT,
     MIDDLE,
+    OTHER,
     NONE
 
 }

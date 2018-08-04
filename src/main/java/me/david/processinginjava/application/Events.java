@@ -2,6 +2,7 @@ package me.david.processinginjava.application;
 
 import me.david.processinginjava.Application;
 import me.david.processinginjava.exception.InputException;
+import me.david.processinginjava.input.MouseButton;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -26,6 +27,19 @@ public class Events {
         GLFW.glfwSetMouseButtonCallback(window, (windowID, button, action, mods) -> {
             if (action == GLFW.GLFW_RELEASE) {
                 application.mousePressed = false;
+                switch (button) {
+                    case GLFW.GLFW_MOUSE_BUTTON_LEFT:
+                        application.mouseButton = MouseButton.LEFT;
+                        break;
+                    case GLFW.GLFW_MOUSE_BUTTON_RIGHT:
+                        application.mouseButton = MouseButton.RIGHT;
+                        break;
+                    case GLFW.GLFW_MOUSE_BUTTON_MIDDLE:
+                        break;
+                    default:
+                        application.mouseButton = MouseButton.OTHER;
+                        break;
+                }
                 try {
                     application.mouseClicked();
                 } catch (Exception ex) {
@@ -33,6 +47,7 @@ public class Events {
                 }
             } else {
                 application.mousePressed = true;
+                application.mouseButton = MouseButton.NONE;
             }
         });
     }
