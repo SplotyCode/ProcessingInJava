@@ -20,6 +20,7 @@ public class Application {
     public boolean mousePressed;
     public MouseButton mouseButton = MouseButton.NONE;
     public int mouseButtonInt;
+    public double mouseX, mouseY;
 
     protected void setup() throws Exception {}
     public void draw() throws Exception {}
