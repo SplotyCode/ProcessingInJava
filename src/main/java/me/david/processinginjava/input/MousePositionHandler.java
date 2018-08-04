@@ -20,6 +20,12 @@ public class MousePositionHandler extends InputHandler implements GLFWCursorPosC
             } catch (Exception ex) {
                 throw new InputException("Exception in mouseDragged() function", ex);
             }
+        } else {
+            try {
+                application.mouseMoved();
+            } catch (Exception ex) {
+                throw new InputException("Exception in mouseMoved() function", ex);
+            }
         }
     }
 }
