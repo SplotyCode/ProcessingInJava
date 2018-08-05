@@ -1,6 +1,7 @@
 package me.david.processinginjava.input;
 
 import me.david.processinginjava.Application;
+import me.david.processinginjava.functions.BaseObject;
 import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 import org.lwjgl.opengl.GL11;
 
@@ -14,6 +15,9 @@ public class WindowResizeHandler extends InputHandler implements GLFWWindowSizeC
     public void invoke(long windowID, int width, int height) {
         application.getStartupHelper().setHeight(height);
         application.getStartupHelper().setWidth(width);
+
+        BaseObject.width = width;
+        BaseObject.height = height;
 
         GL11.glViewport(0, 0, application.getStartupHelper().getWidth(), application.getStartupHelper().getHeight());
         GL11.glMatrixMode(GL11.GL_PROJECTION);

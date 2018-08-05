@@ -29,6 +29,8 @@ Supported Variables:
 * keyPressed
 * key
 * keyCode
+* width
+* height
 
 Supported Events:
 * setup()

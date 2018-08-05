@@ -1,7 +1,5 @@
 package me.david.processinginjava.functions;
 
-import me.david.processinginjava.Application;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -9,6 +7,9 @@ import java.awt.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class BaseObject {
+
+    public static int height, width;
+
 
     private static int fill = 1, stroke = 1;
 
