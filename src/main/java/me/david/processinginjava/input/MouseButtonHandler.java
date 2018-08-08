@@ -13,7 +13,7 @@ public class MouseButtonHandler extends InputHandler implements GLFWMouseButtonC
 
     @Override
     public void invoke(long windowID, int button, int action, int mods) {
-        MouseEvent event = new MouseEvent(action, button, mods, MouseButton.fromButton(button));
+        MouseClickEvent event = new MouseClickEvent(action, button, mods, MouseButton.fromButton(button));
         if (action == GLFW.GLFW_RELEASE) {
             application.mousePressed = false;
             application.mouseButton = MouseButton.NONE;
